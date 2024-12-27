@@ -17,11 +17,11 @@
 
   Inode：在EXT2文件系统中,索引节点inode用于描述一个文件或目录的基本信息。为了简化，本项目仅实施了一部分：
   
-![1.1步骤1 步骤2](./assets/3/GroupDesc.png)
+![1.1步骤1 步骤2](./assets/3/Inode.png)
 
   DirEntry：用于目录的数据块中，存储单个文件或子目录的基本信息。“目录”就是由若干个 DirEntry 依次排列构成：
   
-![1.1步骤1 步骤2](./assets/3/GroupDesc.png)
+![1.1步骤1 步骤2](./assets/3/DirEntry.png)
 
 #### 2.内存的分配与释放
 
