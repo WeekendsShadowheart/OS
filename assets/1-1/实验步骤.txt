@@ -1,0 +1,404 @@
+首先对云服务器进行安装
+由于当前位置距离北京较远，我选择了墨西哥城进行实验。
+
+在完成操作指南的基础上，由于我需要把服务器接入github，并且使用homebrew在服务器上安装编辑器，所以我创建了一个新的用户。步骤如下：
+
+-----------------------------------------------------------------------------------------
+[root@kp-test01 ~]# useradd -m -s /bin/bash week
+[root@kp-test01 ~]# passwd week
+更改用户 week 的密码 。
+新的 密码：
+重新输入新的 密码：
+passwd：所有的身份验证令牌已经成功更新。
+[root@kp-test01 ~]# usermod -aG wheel week
+[root@kp-test01 ~]# su - week
+
+
+Welcome to 4.19.90-2003.4.0.0036.oe1.x86_64
+
+System information as of time: 	Sat Nov 30 17:09:41 CST 2024
+
+System load: 	0.00
+Processes: 	103
+Memory used: 	4.8%
+Swap used: 	0.0%
+Usage On: 	7%
+IP address: 	192.168.0.57
+Users online: 	1
+
+
+
+[week@kp-test01 ~]$ ls
+[week@kp-test01 ~]$ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+[week@kp-test01 ~]$ git --version
+bash: git: command not found
+[week@kp-test01 ~]$ sudo yum install git -y
+[sudo] password for week: 
+Waiting for process with pid 8501 to finish.
+Last metadata expiration check: 0:00:01 ago on Sat 30 Nov 2024 05:14:06 PM CST.
+Dependencies resolved.
+================================================================================
+ Package                 Architecture  Version                  Repo       Size
+================================================================================
+Installing:
+ git                     x86_64        2.23.0-12.oe1            OS        5.5 M
+Installing dependencies:
+ perl-Error              noarch        1:0.17026-4.oe1          OS         31 k
+ perl-Git                noarch        2.23.0-12.oe1            OS         27 k
+ perl-TermReadKey        x86_64        2.38-2.oe1               OS         24 k
+
+Transaction Summary
+================================================================================
+Install  4 Packages
+
+Total download size: 5.6 M
+Installed size: 30 M
+Downloading Packages:
+(1/4): perl-Git-2.23.0-12.oe1.noarch.rpm         41 kB/s |  27 kB     00:00    
+(2/4): perl-Error-0.17026-4.oe1.noarch.rpm       47 kB/s |  31 kB     00:00    
+(3/4): perl-TermReadKey-2.38-2.oe1.x86_64.rpm   109 kB/s |  24 kB     00:00    
+(4/4): git-2.23.0-12.oe1.x86_64.rpm             1.1 MB/s | 5.5 MB     00:05    
+--------------------------------------------------------------------------------
+Total                                           1.1 MB/s | 5.6 MB     00:05     
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                        1/1 
+  Installing       : perl-TermReadKey-2.38-2.oe1.x86_64                     1/4 
+  Installing       : perl-Error-1:0.17026-4.oe1.noarch                      2/4 
+  Installing       : perl-Git-2.23.0-12.oe1.noarch                          3/4 
+  Installing       : git-2.23.0-12.oe1.x86_64                               4/4 
+  Running scriptlet: git-2.23.0-12.oe1.x86_64                               4/4 
+  Verifying        : git-2.23.0-12.oe1.x86_64                               1/4 
+  Verifying        : perl-Error-1:0.17026-4.oe1.noarch                      2/4 
+  Verifying        : perl-Git-2.23.0-12.oe1.noarch                          3/4 
+  Verifying        : perl-TermReadKey-2.38-2.oe1.x86_64                     4/4 
+
+Installed:
+  git-2.23.0-12.oe1.x86_64             perl-Error-1:0.17026-4.oe1.noarch        
+  perl-Git-2.23.0-12.oe1.noarch        perl-TermReadKey-2.38-2.oe1.x86_64       
+
+Complete!
+[week@kp-test01 ~]$ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+==> Checking for `sudo` access (which may request your password)...
+==> This script will install:
+/home/linuxbrew/.linuxbrew/bin/brew
+/home/linuxbrew/.linuxbrew/share/doc/homebrew
+/home/linuxbrew/.linuxbrew/share/man/man1/brew.1
+/home/linuxbrew/.linuxbrew/share/zsh/site-functions/_brew
+/home/linuxbrew/.linuxbrew/etc/bash_completion.d/brew
+/home/linuxbrew/.linuxbrew/Homebrew
+
+Press RETURN/ENTER to continue or any other key to abort:
+==> /usr/bin/sudo /bin/chown -R week:week /home/linuxbrew/.linuxbrew/Homebrew
+==> Downloading and installing Homebrew...
+remote: Enumerating objects: 286582, done.
+remote: Counting objects: 100% (161/161), done.
+remote: Compressing objects: 100% (126/126), done.
+remote: Total 286582 (delta 35), reused 152 (delta 29), pack-reused 286421 (from 1)
+Receiving objects: 100% (286582/286582), 89.74 MiB | 1.25 MiB/s, done.
+Resolving deltas: 100% (204920/204920), done.
+remote: Enumerating objects: 55, done.
+remote: Counting objects: 100% (33/33), done.
+remote: Total 55 (delta 33), reused 33 (delta 33), pack-reused 22 (from 1)
+Unpacking objects: 100% (55/55), done.
+==> Updating Homebrew...
+==> Downloading https://ghcr.io/v2/homebrew/portable-ruby/portable-ruby/blobs/sha256:ddc6e7963b71b78263e2f5c80464a5ed563897a2b03c22e86b1ec14548de800b
+######################################################################### 100.0%
+==> Pouring portable-ruby-3.3.6.x86_64_linux.bottle.tar.gz
+Warning: /home/linuxbrew/.linuxbrew/bin is not in your PATH.
+  Instructions on how to configure your shell for Homebrew
+  can be found in the 'Next steps' section below.
+==> Installation successful!
+
+==> Homebrew has enabled anonymous aggregate formulae and cask analytics.
+Read the analytics documentation (and how to opt-out) here:
+  https://docs.brew.sh/Analytics
+No analytics data has been sent yet (nor will any be during this install run).
+
+==> Homebrew is run entirely by unpaid volunteers. Please consider donating:
+  https://github.com/Homebrew/brew#donations
+
+==> Next steps:
+- Run these commands in your terminal to add Homebrew to your PATH:
+    echo >> /home/week/.bashrc
+    echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /home/week/.bashrc
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+- Install Homebrew's dependencies if you have sudo access:
+    sudo dnf group install development-tools
+  For more information, see:
+    https://docs.brew.sh/Homebrew-on-Linux
+- We recommend that you install GCC:
+    brew install gcc
+- Run brew help to get started
+- Further documentation:
+    https://docs.brew.sh
+-----------------------------------------------------------------------------------------
+
+输入以下指令进入服务器用户week空间：ssh week@122.8.179.172
+创建文件夹 mkdir proj1
+[week@kp-test01 ~]$ ls
+proj1
+[week@kp-test01 ~]$ cd proj1
+[week@kp-test01 proj1]$ ls
+1-1.c
+------------------------------------------------------------------------------------------
+步骤步骤12代码：
+#include <stdio.h>
+#include<unistd.h>
+#include<sys/types.h>
+#include<sys/wait.h>
+#include<pthread.h>
+#include<stdlib.h>
+
+int global_value = 0;
+
+int main()
+{
+        pid_t pid, pid1;
+
+        pid = fork();
+
+        if(pid < 0)
+        {
+                fprintf(stderr, "Fork Failed");
+                return 1;
+        }
+        else if(pid == 0){
+
+                global_value ++;
+                pid = getpid();
+                printf("child:pid = %d\n", pid);
+                printf("child:pid1 = %d\n", pid1);
+        }
+        else
+        {
+                pid1 = getpid();
+                global_value --;
+                printf("parent:pid = %d\n", pid);
+                printf("parent:pid1 = %d\n", pid1);
+        //        wait(NULL);
+        }
+        return 0;
+}
+------------------------------------------------------------------------------------------
+使用如下指令编译.c 文件变成可执行文件：
+gcc 1-1.c -o 1-1
+效果：
+[week@kp-test01 proj1]$ ls
+1-1  1-1.c  1-1.o
+
+------------------------------------------------------------------------------------------
+步骤三代码:
+#include <stdio.h>
+#include<unistd.h>
+#include<sys/types.h>
+#include<sys/wait.h>
+#include<pthread.h>
+#include<stdlib.h>
+
+int global_value = 0;
+
+int main()
+{
+        pid_t pid, pid1;
+
+        pid = fork();
+
+        if(pid < 0)
+        {
+                fprintf(stderr, "Fork Failed");
+                return 1;
+        }
+        else if(pid == 0){
+
+                
+                pid = getpid();
+		global_value ++;
+                printf("child:global_value = %d\n", global_value);
+                printf("child:*global_value = %p\n", &global_value);
+        }
+        else
+        {
+                pid1 = getpid();
+                global_value --;
+                printf("parent:global_value = %d\n", global_value);
+                printf("parent:*global_value = %p\n", &global_value);
+        }
+
+
+        return 0;
+}
+
+结果：
+parent:global_value = -1
+parent:*global_value = 0x40406c
+child:global_value = 1
+child:*global_value = 0x40406c
+
+------------------------------------------------------------------------------------------
+步骤四代码:
+#include <stdio.h>
+#include<unistd.h>
+#include<sys/types.h>
+#include<sys/wait.h>
+#include<pthread.h>
+#include<stdlib.h>
+
+int global_value = 0;
+
+int main()
+{
+        pid_t pid, pid1;
+
+        pid = fork();
+
+        if(pid < 0)
+        {
+                fprintf(stderr, "Fork Failed");
+                return 1;
+        }
+        else if(pid == 0){
+
+                
+                pid = getpid();
+		global_value ++;
+                printf("child:global_value = %d\n", global_value);
+                printf("child:*global_value = %p\n", &global_value);
+        }
+        else
+        {
+                pid1 = getpid();
+                global_value --;
+                printf("parent:global_value = %d\n", global_value);
+                printf("parent:*global_value = %p\n", &global_value);
+        }
+	
+	global_value += 2;
+	printf("return:global_value = %d\n", global_value);
+        printf("return:*global_value = %p\n", &global_value);
+
+        return 0;
+}
+
+结果：
+parent:global_value = -1
+parent:*global_value = 0x40406c
+return:global_value = 1
+return:*global_value = 0x40406c
+child:global_value = 1
+child:*global_value = 0x40406c
+return:global_value = 3
+return:*global_value = 0x40406c
+------------------------------------------------------------------------------------------
+步骤五代码：
+system_call:
+
+#include <stdio.h>
+#include <pthread.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <stdlib.h>
+
+int main() {
+    int pid = getpid();
+    printf("system_call PID: %d\n", pid);
+
+    return 0;
+}
+
+使用system：
+#include<stdio.h>
+#include<pthread.h>
+#include<unistd.h>
+#include<sys/types.h>
+#include<sys/wait.h>
+#include<stdlib.h>
+
+int main()
+{
+    pid_t pid, pid1;
+    pid = fork();
+
+    if (pid < 0) {
+        fprintf(stderr, "Fork Failed");
+        return 1;
+    }
+    else if (pid == 0) {
+        pid1 = getpid();
+        printf("child process1 PID: %d\n", pid1);
+        system("/usr/local/src/system_call");
+        printf("child process PID: %d\n", pid1);
+    }
+    else {
+        pid1 = getpid();
+        printf("parent process PID: %d\n", pid1);
+    }
+
+    return 0;
+}
+
+使用exec：
+
+#include <stdio.h>
+#include <pthread.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <stdlib.h>
+
+int main() {
+    pid_t pid, pid1;
+
+    pid = fork();
+
+    if (pid < 0) {
+        fprintf(stderr, "Fork Failed");
+        return 1;
+    } 
+    else if (pid == 0) {
+        pid1 = getpid();
+        printf("child process1 PID: %d\n", pid1);
+        execl("/bin/sh", "sh", "-c", "./system_call", (char *)0);
+        printf("child process PID: %d\n", pid1);
+    } 
+    else {
+        pid1 = getpid();
+        printf("parent process PID: %d\n", pid1);
+        wait(NULL);
+    }
+
+    return 0;
+}
+
+结果：
+[week@kp-test01 proj1]$ ./1-1-5-e
+parent process PID: 20484
+child process1 PID: 20485
+system_call PID: 20485
+[week@kp-test01 proj1]$ ./1-1-5-s
+parent process PID: 20498
+child process1 PID: 20499
+system_call PID: 20500
+child process PID: 20499
+
+------------------------------------------------------------------------------------------
+ssh week@122.8.179.172
+
+实验1-2线程
+
+
+
+
+
+
+
+
+
+
+
+
+
