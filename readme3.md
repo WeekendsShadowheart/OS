@@ -35,7 +35,7 @@
 
   free_inode：
   
-![1.1步骤1 步骤2](./assets/3/load/free_inode.png)
+![1.1步骤1 步骤2](./assets/3/free_inode.png)
 
   alloc_free_block：类似于alloc_free_inode, 分配时找空闲位、置 1 并把块内容清零；释放则置 0 。
   
@@ -50,7 +50,7 @@
   为根目录分配一个数据块，并在其中写入 “.” 和 “..” 两个目录项；
   更新根目录 inode 大小、时间，组描述符等
   
-![1.1步骤1 步骤2](./assets/3/load/init_disk_file.png)
+![1.1步骤1 步骤2](./assets/3/init_disk_file.png)
 
   init_memory：初始化内存中的全局变量，包括组描述符、打开表、当前目录、当前路径等。
   
